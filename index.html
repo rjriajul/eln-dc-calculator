@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELN DC-to-DC Converter Calculator | Electrical Age Minecraft Mod Tool</title>
+  <meta name="description" content="Free online calculator for Minecraft Electrical Age mod. Find the optimal Green/Yellow slider values for the Variable DC-to-DC Converter. Brute-force 1-16 integer combinations for minimal voltage error.">
+  <meta name="keywords" content="ELN, Electrical Age, Minecraft, DC-to-DC converter, calculator, slider, voltage, green box, yellow box, mod tool">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>&#9889; ELN DC-to-DC Converter</h1>
+      <p>Electrical Age Mod &mdash; Slider Calculator</p>
+    </header>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="find">Find Best Ratio</button>
+      <button class="tab-btn" data-tab="calc">Calculate Output</button>
+    </div>
+
+    <!-- Tab 1: Find Best Ratio -->
+    <div class="tab-panel active" id="tab-find">
+      <div class="card">
+        <div class="input-group">
+          <label for="vin-find">Input Voltage (Green Box)</label>
+          <input type="number" id="vin-find" placeholder="e.g. 220" min="0.01" step="any">
+        </div>
+        <div class="input-group">
+          <label for="vout-find">Target Output Voltage (Yellow Box)</label>
+          <input type="number" id="vout-find" placeholder="e.g. 500" min="0.01" step="any">
+        </div>
+        <button class="btn btn-primary" id="btn-find">Calculate</button>
+      </div>
+
+      <div class="results" id="results-find">
+        <div class="result-card">
+          <div class="slider-visual">
+            <div class="slider-box green">
+              <div class="label">&#x1f7e9; Green (Input)</div>
+              <div class="value" id="green-val">1</div>
+              <div class="slider-bar-container">
+                <div class="slider-bar-track"><div class="slider-bar-fill" id="green-bar"></div></div>
+                <div class="slider-bar-labels"><span>1</span><span>16</span></div>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="slider-box yellow">
+              <div class="label">&#x1f7e8; Yellow (Output)</div>
+              <div class="value" id="yellow-val">1</div>
+              <div class="slider-bar-container">
+                <div class="slider-bar-track"><div class="slider-bar-fill" id="yellow-bar"></div></div>
+                <div class="slider-bar-labels"><span>1</span><span>16</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="stat">
+            <span class="stat-label">Target Voltage</span>
+            <span class="stat-value" id="stat-target">&mdash;</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Actual Output</span>
+            <span class="stat-value good" id="stat-actual">&mdash;</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Difference</span>
+            <span class="stat-value" id="stat-diff">&mdash;</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Error %</span>
+            <span class="stat-value" id="stat-error">&mdash;</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Ratio</span>
+            <span class="stat-value" id="stat-ratio">&mdash;</span>
+          </div>
+          <p class="error-note" id="error-note"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Calculate Output -->
+    <div class="tab-panel" id="tab-calc">
+      <div class="card">
+        <div class="input-group">
+          <label for="vin-calc">Input Voltage</label>
+          <input type="number" id="vin-calc" placeholder="e.g. 220" min="0.01" step="any">
+        </div>
+        <div class="row">
+          <div class="input-group">
+            <label for="green-calc">&#x1f7e9; Green (1&ndash;16)</label>
+            <input type="number" id="green-calc" placeholder="1" min="1" max="16" step="1">
+          </div>
+          <div class="input-group">
+            <label for="yellow-calc">&#x1f7e8; Yellow (1&ndash;16)</label>
+            <input type="number" id="yellow-calc" placeholder="1" min="1" max="16" step="1">
+          </div>
+        </div>
+        <button class="btn btn-primary" id="btn-calc">Calculate</button>
+      </div>
+
+      <div class="results" id="results-calc">
+        <div class="result-card">
+          <div class="stat">
+            <span class="stat-label">Input Voltage</span>
+            <span class="stat-value" id="calc-input">&mdash;</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Slider Ratio</span>
+            <span class="stat-value" id="calc-ratio">&mdash;</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Output Voltage</span>
+            <span class="stat-value good" id="calc-output">&mdash;</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>For <a href="https://www.curseforge.com/minecraft/mc-mods/electrical-age" target="_blank" rel="noopener">Electrical Age</a> mod &mdash; Not affiliated with ELN developers.</p>
+      <p style="margin-top:0.25rem">Source code on <a href="https://github.com/rjriajul/eln-dc-calculator" target="_blank" rel="noopener">GitHub</a></p>
+    </footer>
+  </div>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
